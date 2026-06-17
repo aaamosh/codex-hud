@@ -1,41 +1,71 @@
-# codex-hud
+# codex-hud / codex-buddy
 
-`codex-hud` is a monorepo for small Codex-adjacent operator tools. The current MVP app is `codex-buddy`, a Telegram-based human-to-human matching layer around the official OpenAI Codex referral flow.
+> **Codex referrals, coordinated.**
+> A small Telegram bot that pairs people who have OpenAI Codex referral slots with people who don't yet have Codex access — so both sides get a banked rate-limit reset through the official OpenAI flow.
 
-## Purpose
+**→ Try it: [t.me/codexHuddbot](https://t.me/codexHuddbot)**
 
-`codex-buddy` helps:
+[![status](https://img.shields.io/badge/status-live-2ea44f)](https://t.me/codexHuddbot)
+[![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![promo window](https://img.shields.io/badge/OpenAI%20promo-through%202026--06--24-orange)](https://help.openai.com/en/articles/20001271-codex-referral-promotions)
 
-- Plus/Pro users with referral capacity offer help to real people.
-- Not-yet-eligible Codex users find a real person who can invite them through the official OpenAI flow.
-- Both sides close the loop after the invitee accepts and sends the first Codex message.
+---
 
-It is not an invite marketplace, not an automated referral sender, and does not call undocumented OpenAI invite mutation endpoints.
+## What this is
 
-The current Telegram intake is intentionally minimal for a technical audience:
+OpenAI is running a **time-bounded Codex referral promotion through 2026-06-24**. Plus/Pro subscribers get up to 3 invites; every time a new person accepts an invite and sends their first Codex message, **both sides earn one banked rate-limit reset** they can spend whenever they want.
 
-- givers enter only the number of active invite slots they want to offer
-- seekers enter only the email needed for the official invite flow and confirm they can act quickly
-- plan, language, country, and timezone are not asked in the bot; compatibility defaults are stored internally so old schema/config stays reusable
+The catch: if you don't already know someone outside the Codex bubble, you have no one to invite. And if you're not yet on Codex, you have no easy way to find someone with a free slot.
 
-## Current Scope Status
+`codex-buddy` solves exactly that coordination problem.
 
-Status: production-quality MVP scaffold with two deploy paths:
+### If you have invite slots to give
 
-- current fast path: Server4-native Node/Hono + SQLite runtime in `apps/buddy-server`
-- future promo path: Cloudflare Worker/Hono + D1 + Durable Object runtime in `apps/buddy-bot`
+1. Start a chat with the bot, send `/give`, tell it how many slots you're offering.
+2. When a real seeker shows up, the bot relays their email to you once. You manually send the official invite from your Codex app or extension.
+3. After both sides confirm the loop closed, you both have a banked reset.
 
-The Server4 path is intended for the current small-volume spike. The Cloudflare path is preserved for a later higher-volume promo campaign.
+### If you want a Codex invite
 
-Server4 activation state:
+1. Start a chat with the bot, send `/seek`, give it the email you'd like to receive the invite at.
+2. The bot waits for a real giver to take your slot. You'll get a normal OpenAI invite by email — no funny business.
+3. Accept it, send your first Codex message, hit `/confirmed` to close the loop. The giver does the same.
 
-- Telegram bot token and admin Telegram ID allowlist are installed in `/etc/codex-buddy/codex-buddy.env` on Server4.
-- Telegram webhook is registered for `@codexHuddbot` at the operator-configured HTTPS endpoint with the Server4 self-signed certificate.
-- Telegram command list, bot name, short description, and full description are configured in English for the default, `en`, and `ru` Telegram Bot API profile scopes.
-- The deployed Server4 runtime is rechecked after behavior changes with systemd/nginx health, public and loopback health, cron, Telegram webhook info, Telegram bot profile setup, admin auth, and Server4 health monitor evidence.
-- Admin HTML is `lang=en` and the live admin response has no Cyrillic characters.
-- A real operator click-through of the simplified `/give` and `/seek` Telegram intake reached Server4. The resulting state has one active giver offer and one pending seeker request on the same Telegram user, so no match is created by design because self-referrals are blocked.
-- Real Cloudflare D1 database IDs in `apps/buddy-bot/wrangler.toml` for the future Cloudflare path.
+### What this isn't
+
+- ❌ Not an invite marketplace, not a code reseller, **no money involved**.
+- ❌ Not an automated referral sender — the giver manually uses OpenAI's official invite flow.
+- ❌ Does **not** call any unofficial OpenAI mutation endpoints. Email is the only thing relayed.
+- ❌ Not a way around OpenAI's ToS — both sides are real people doing the real flow.
+
+### Privacy
+
+Seeker email is encrypted at rest with AES-GCM, deduped by HMAC-SHA-256 (keyed with a private pepper, so the raw email never has to be stored to dedupe). Admin UI only ever shows a masked email. After the bot relays the email to a matched giver once, the encrypted blob is wiped. The bot never logs full email addresses. Details in [docs/privacy-retention.md](docs/privacy-retention.md).
+
+## Related: codex-reset
+
+If you already have a banked reset waiting and are stuck on Linux / a server / a terminal where the redeem button doesn't appear (see [openai/codex#27915](https://github.com/openai/codex/issues/27915)), the companion CLI tool [aaamosh/codex-reset](https://github.com/aaamosh/codex-reset) talks to the same `/wham/rate-limit-reset-credits/consume` endpoint the Codex desktop app uses, so you can spend the credit from the command line.
+
+`codex-buddy` is the *acquisition* half (find a referral partner). `codex-reset` is the *redemption* half (spend the credit afterwards).
+
+---
+
+## For operators
+
+`codex-hud` is a small TypeScript monorepo whose first app is `codex-buddy`. Two runtimes are scaffolded; only the first is currently in production:
+
+- **`apps/buddy-server`** — Node/Hono + native SQLite, deployed on Server4 under systemd as `codex-buddy.service`. This is the live path.
+- **`apps/buddy-bot`** — Cloudflare Worker/Hono + D1 + Durable Object. Scaffolded for a higher-volume future promo wave; not currently deployed.
+
+Server4 activation state (as of last deploy):
+
+- Telegram bot token and admin Telegram ID allowlist live in `/etc/codex-buddy/codex-buddy.env`.
+- Telegram webhook registered for `@codexHuddbot` at the operator-configured HTTPS endpoint with the Server4 self-signed certificate.
+- Bot name, command list, and EN/RU descriptions are set in the Telegram profile via `server:set-telegram-profile`.
+- Server4 runtime is rechecked after behavior changes via systemd/nginx, loopback + public health, cron, Telegram webhook info, admin auth, and Server4 health-monitor evidence.
+- Admin HTML is `lang=en`; the live admin response has no Cyrillic characters.
+- A real operator click-through of `/give` and `/seek` reached Server4. The resulting state has one giver offer and one seeker request on the same Telegram user, so no match is created by design — self-referrals are blocked.
+- `apps/buddy-bot/wrangler.toml` has real Cloudflare D1 IDs ready for the future path.
 
 ## Components
 
