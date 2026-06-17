@@ -1,0 +1,19 @@
+{
+  "update_id": 1000003,
+  "message": {
+    "message_id": 8,
+    "from": {
+      "id": 222222,
+      "is_bot": false,
+      "first_name": "Mira",
+      "username": "mira_seek",
+      "language_code": "ru"
+    },
+    "chat": {
+      "id": 222222,
+      "type": "private"
+    },
+    "text": "mira@example.com"
+  }
+}
+

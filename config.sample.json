@@ -1,0 +1,17 @@
+{
+  "promo_end_at": null,
+  "archive_mode": false,
+  "archive_mode_message": "Matching is paused because the current referral wave has ended. Status, rules, and help remain available.",
+  "max_giver_capacity_by_plan": {
+    "plus": 1,
+    "pro": 3
+  },
+  "reservation_ttl_minutes": 90,
+  "completion_timeout_minutes": 1440,
+  "plaintext_relay_ttl_minutes": 30,
+  "seeker_email_cooldown_hours": 168,
+  "cancel_spam_cooldown_minutes": 30,
+  "max_cancel_events_per_window": 3,
+  "allowed_regions": [],
+  "language_priority": ["ru", "en"]
+}

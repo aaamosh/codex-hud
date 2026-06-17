@@ -1,0 +1,19 @@
+{
+  "update_id": 1000001,
+  "message": {
+    "message_id": 1,
+    "from": {
+      "id": 111111,
+      "is_bot": false,
+      "first_name": "Alex",
+      "username": "alex_giver",
+      "language_code": "ru"
+    },
+    "chat": {
+      "id": 111111,
+      "type": "private"
+    },
+    "text": "/start"
+  }
+}
+

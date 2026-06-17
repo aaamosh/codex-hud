@@ -1,0 +1,11 @@
+[Unit]
+Description=Run codex-buddy cleanup and reminders
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=10min
+RandomizedDelaySec=30s
+Persistent=true
+
+[Install]
+WantedBy=timers.target

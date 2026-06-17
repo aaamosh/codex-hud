@@ -1,0 +1,14 @@
+{
+  "name": "@codex-hud/buddy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@codex-hud/config": "0.1.0",
+    "@codex-hud/core": "0.1.0",
+    "@codex-hud/telegram": "0.1.0"
+  }
+}

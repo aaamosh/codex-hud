@@ -1,0 +1,41 @@
+{
+  "name": "codex-hud",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit --pretty false",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "npm run typecheck",
+    "dev": "npm --workspace @codex-hud/buddy-bot run dev",
+    "dev:cloudflare": "npm --workspace @codex-hud/buddy-bot run dev",
+    "dev:server": "npm --workspace @codex-hud/buddy-server run dev",
+    "deploy": "npm --workspace @codex-hud/buddy-bot run deploy",
+    "deploy:cloudflare": "npm --workspace @codex-hud/buddy-bot run deploy",
+    "server:migrate": "npm --workspace @codex-hud/buddy-server run migrate",
+    "server:seed": "npm --workspace @codex-hud/buddy-server run seed",
+    "server:cron": "npm --workspace @codex-hud/buddy-server run cron",
+    "server:set-webhook": "npm --workspace @codex-hud/buddy-server run set-webhook",
+    "server:set-telegram-profile": "npm --workspace @codex-hud/buddy-server run set-telegram-profile",
+    "migrate:local": "npm --workspace @codex-hud/buddy-bot run migrate:local",
+    "migrate:remote": "npm --workspace @codex-hud/buddy-bot run migrate:remote",
+    "seed:local": "tsx scripts/seed-local-config.ts --local",
+    "seed:remote": "tsx scripts/seed-local-config.ts --remote",
+    "playwright:test": "npm --workspace @codex-hud/buddy-bot run playwright:test"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "4.20260616.1",
+    "@playwright/test": "1.54.0",
+    "@types/node": "24.0.4",
+    "tsx": "4.20.3",
+    "typescript": "5.8.3",
+    "vitest": "3.2.4",
+    "wrangler": "4.20.5"
+  }
+}

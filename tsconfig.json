@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": [
+      "@cloudflare/workers-types",
+      "vitest/globals",
+      "node"
+    ],
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@codex-hud/core": [
+        "packages/core/src/index.ts"
+      ],
+      "@codex-hud/config": [
+        "packages/config/src/index.ts"
+      ],
+      "@codex-hud/buddy": [
+        "packages/buddy/src/index.ts"
+      ],
+      "@codex-hud/db": [
+        "packages/db/src/index.ts"
+      ],
+      "@codex-hud/db-sqlite": [
+        "packages/db-sqlite/src/index.ts"
+      ],
+      "@codex-hud/telegram": [
+        "packages/telegram/src/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "apps/**/*.ts",
+    "packages/**/*.ts",
+    "scripts/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "coverage",
+    "dist",
+    ".wrangler"
+  ]
+}

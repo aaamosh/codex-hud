@@ -1,0 +1,19 @@
+[Unit]
+Description=codex-buddy Telegram matching server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/projects/codex-hud
+EnvironmentFile=/etc/codex-buddy/codex-buddy.env
+ExecStart=/usr/bin/npm --workspace @codex-hud/buddy-server run start
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=read-only
+ReadWritePaths=/var/lib/codex-buddy
+
+[Install]
+WantedBy=multi-user.target

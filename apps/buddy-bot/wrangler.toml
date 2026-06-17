@@ -1,0 +1,24 @@
+name = "codex-hud-buddy-bot"
+main = "src/index.ts"
+compatibility_date = "2025-06-17"
+workers_dev = true
+
+[observability]
+enabled = true
+
+[triggers]
+crons = ["*/10 * * * *", "0 * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "codex_hud_buddy"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "../../packages/db/migrations"
+
+[[durable_objects.bindings]]
+name = "MATCHMAKER"
+class_name = "MatchmakerDurableObject"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["MatchmakerDurableObject"]
