@@ -51,6 +51,18 @@ Run one cleanup pass:
 npm --prefix /opt/projects/codex-hud run server:cron
 ```
 
+Inspect the live SQLite database read-only:
+
+```bash
+sqlite3 -readonly /var/lib/codex-buddy/codex-buddy.sqlite ".tables"
+sqlite3 -readonly /var/lib/codex-buddy/codex-buddy.sqlite \
+  "SELECT state, COUNT(*) FROM matches GROUP BY state;"
+```
+
+Do not query or paste plaintext email, `email_hash`, `email_ciphertext`,
+Telegram tokens, admin tokens, or raw Server4 host values into tickets, logs,
+screenshots, or reports.
+
 When running CLI commands manually, source `/etc/codex-buddy/codex-buddy.env` first or export the required variables for that command.
 
 Re-register Telegram webhook after certificate/base URL changes:

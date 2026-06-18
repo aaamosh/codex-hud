@@ -125,3 +125,13 @@ records:
       - apps/buddy-bot/test/integration-flow.test.ts
       - public repo hygiene scan before visibility switch
     fitness_metric: future helper changes should preserve GitHub-only distribution, no Server4-host exposure, and no OpenAI mutation automation
+
+  - id: BP-2026-06-18-001
+    scope: codex-buddy Server4 SQLite admin inspection
+    trigger: live admin diagnosis needed SQLite timeline data, and nested SSH plus inline JavaScript quoting repeatedly delayed read-only evidence collection
+    guardrail: keep the Server4 `sqlite3` CLI available for operator diagnostics; use `sqlite3 -readonly` with simple queries or a staged SQL file, and never print plaintext email, `email_hash`, `email_ciphertext`, tokens, or raw host values
+    validation:
+      - docs/operator-runbook.md
+      - `CODEX-BUDDY-SQLITE3-INSTALL-20260618`
+      - `CODEX-BUDDY-ADMIN-READONLY-20260618I`
+    fitness_metric: future live SQLite investigations should collect sanitized timeline evidence without repeated nested quoting failures or sensitive-value leakage
