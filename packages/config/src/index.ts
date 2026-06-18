@@ -10,7 +10,7 @@ export const DEFAULT_CONFIG: BuddyRuntimeConfig = {
     plus: 1,
     pro: 3
   },
-  reservation_ttl_minutes: 90,
+  reservation_ttl_minutes: 240,
   completion_timeout_minutes: 24 * 60,
   plaintext_relay_ttl_minutes: 30,
   seeker_email_cooldown_hours: 7 * 24,
