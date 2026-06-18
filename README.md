@@ -74,7 +74,6 @@ Server4 activation state (as of last deploy):
 - `packages/buddy`: shared business service for giver/seeker intake, matching, confirmations, cleanup, archive.
 - `packages/core`: enums, state machine, matching, privacy, anti-abuse, archive, metrics.
 - `packages/telegram`: Telegram API wrapper, callback parser, English bot copy, and inline keyboards.
-- `assets`: transparent downloadable helper assets, including the GitHub-only invite helper HTML.
 - `packages/db`: D1 repository and migrations.
 - `packages/db-sqlite`: D1-compatible SQLite adapter for Server4.
 - `packages/config`: remote-config defaults and validation.
@@ -267,14 +266,18 @@ The admin surface supports:
 - JSON/CSV export
 - aggregate metrics
 
-## Invite Helper Asset
+## Standalone Invite Helper
 
-`assets/codex-buddy-invite-helper.html` is a transparent, single-file helper for givers who cannot easily access the official Codex referral UI from their current machine.
+The invite handoff helper now lives in its own engineering repo:
 
-- Download: `https://github.com/aaamosh/codex-hud/raw/main/assets/codex-buddy-invite-helper.html`
-- Source: `https://github.com/aaamosh/codex-hud/blob/main/assets/codex-buddy-invite-helper.html`
-- It is not hosted on Server4 and the Telegram bot links only to GitHub.
-- It has no external dependencies, no network calls, no cookies/tokens access, and no OpenAI invite endpoint calls.
+- Repo: `https://github.com/aaamosh/codex-invite-helper`
+- Download: `https://github.com/aaamosh/codex-invite-helper/raw/main/invite-helper.html`
+- Source: `https://github.com/aaamosh/codex-invite-helper/blob/main/invite-helper.html`
+
+`codex-hud` only relays those GitHub links after `Show email`. It does not host,
+embed, or own the helper HTML. The helper remains a readable single-file tool
+with no external dependencies, no network calls, no cookies/tokens access, and
+no OpenAI invite endpoint calls.
 
 See `docs/admin.md`.
 
