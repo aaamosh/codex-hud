@@ -118,9 +118,11 @@ records:
   - id: BP-2026-06-17-012
     scope: codex-buddy standalone invite helper boundary
     trigger: a transparent helper should help Linux/CLI users complete the official human flow without exposing the Server4 host or implying automated invite sending
-    guardrail: keep the helper in the dedicated `aaamosh/codex-invite-helper` repo, link Telegram relay copy only to that repo's raw/source URLs, allow the old Codex HUD raw path only as a compatibility pointer, keep the helper network-free, and keep real Server4 host/IP values out of public repo text and Git history
+    guardrail: keep `aaamosh/codex-invite-helper` alive as a minimal overlapping standalone helper, but route current Telegram relay copy to the broader Codex Reset browser companion in `aaamosh/codex-reset`; allow the old Codex HUD raw path only as a compatibility pointer, keep all helpers network-free, and keep real Server4 host/IP values out of public repo text and Git history
     validation:
       - assets/codex-buddy-invite-helper.html
+      - ../codex-reset/codex-reset.html
+      - ../codex-reset/test_codex_reset_page.py
       - ../codex-invite-helper/invite-helper.html
       - ../codex-invite-helper/test/invite-helper.test.mjs
       - packages/buddy/test/invite-helper-link.test.ts

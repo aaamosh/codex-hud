@@ -51,8 +51,8 @@ describe("codex-buddy integration flow", () => {
       now: new Date("2026-06-01T00:03:00.000Z")
     });
     expect(relay[0]?.text).toContain("mira@example.com");
-    expect(relay[0]?.text).toContain("Download: https://github.com/aaamosh/codex-invite-helper/raw/main/invite-helper.html");
-    expect(relay[0]?.text).toContain("It does not send invites, call OpenAI endpoints, read cookies, or use tokens.");
+    expect(relay[0]?.text).toContain("Download: https://github.com/aaamosh/codex-reset/raw/main/codex-reset.html");
+    expect(relay[0]?.text).toContain("It does not send invites, redeem credits, call OpenAI endpoints, read cookies, or use tokens.");
     expect(relay[0]?.afterSend?.clearSeekerEmailCiphertextId).toBe(request.value.id);
 
     await repo.clearSeekerEmailCiphertext(request.value.id);

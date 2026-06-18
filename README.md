@@ -266,19 +266,22 @@ The admin surface supports:
 - JSON/CSV export
 - aggregate metrics
 
-## Standalone Invite Helper
+## Standalone Codex Reset Companion
 
-The invite handoff helper now lives in its own engineering repo:
+The browser companion linked from relay messages now lives in the Codex Reset engineering repo:
 
-- Repo: `https://github.com/aaamosh/codex-invite-helper`
-- Download: `https://github.com/aaamosh/codex-invite-helper/raw/main/invite-helper.html`
-- Source: `https://github.com/aaamosh/codex-invite-helper/blob/main/invite-helper.html`
+- Repo: `https://github.com/aaamosh/codex-reset`
+- Download: `https://github.com/aaamosh/codex-reset/raw/main/codex-reset.html`
+- Source: `https://github.com/aaamosh/codex-reset/blob/main/codex-reset.html`
 
 `codex-hud` only relays those GitHub links after `Show email`. It does not host,
 embed, or own the helper HTML. The legacy `assets/codex-buddy-invite-helper.html`
 path is kept only as a small pointer so old Telegram messages do not break. The
-helper remains a readable single-file tool with no external dependencies, no
-network calls, no cookies/tokens access, and no OpenAI invite endpoint calls.
+companion remains a readable single-file tool with no external dependencies, no
+network calls, no cookies/tokens access, no auth-file reads, and no OpenAI invite
+or reset mutation endpoint calls. The separate `aaamosh/codex-invite-helper`
+repository remains available as a minimal overlapping helper, but current
+`codex-hud` relay copy points to Codex Reset.
 
 See `docs/admin.md`.
 

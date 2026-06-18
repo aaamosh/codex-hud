@@ -26,7 +26,7 @@ The admin UI shows masked email by default. Full seeker email is relayed only to
 
 Match testing note: the bot does not send OpenAI invite emails. After a match, the giver must press `Show email`, copy the relayed email into the official OpenAI Codex invite flow, send the invite there, and only then press `Invite sent`. The seeker should expect an email only after that manual giver step.
 
-Helper note: after `Show email`, the giver receives GitHub download/source links for the standalone `aaamosh/codex-invite-helper` repo. `codex-hud` must not host or embed the helper HTML; it only links to the dedicated repo. The legacy `assets/codex-buddy-invite-helper.html` path may remain only as a compatibility pointer for old messages. The helper must remain a readable single-file HTML with no network calls, no cookies/tokens access, and no OpenAI invite endpoint calls.
+Helper note: after `Show email`, the giver receives GitHub download/source links for the standalone Codex Reset browser companion in `aaamosh/codex-reset`. `codex-hud` must not host or embed the helper HTML; it only links to the Codex Reset repo. The legacy `assets/codex-buddy-invite-helper.html` path may remain only as a compatibility pointer for old messages. The companion must remain a readable single-file HTML with no network calls, no cookies/tokens access, no auth-file reads, and no OpenAI invite or reset mutation endpoint calls.
 
 Current intake:
 
