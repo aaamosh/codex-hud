@@ -275,9 +275,10 @@ The invite handoff helper now lives in its own engineering repo:
 - Source: `https://github.com/aaamosh/codex-invite-helper/blob/main/invite-helper.html`
 
 `codex-hud` only relays those GitHub links after `Show email`. It does not host,
-embed, or own the helper HTML. The helper remains a readable single-file tool
-with no external dependencies, no network calls, no cookies/tokens access, and
-no OpenAI invite endpoint calls.
+embed, or own the helper HTML. The legacy `assets/codex-buddy-invite-helper.html`
+path is kept only as a small pointer so old Telegram messages do not break. The
+helper remains a readable single-file tool with no external dependencies, no
+network calls, no cookies/tokens access, and no OpenAI invite endpoint calls.
 
 See `docs/admin.md`.
 

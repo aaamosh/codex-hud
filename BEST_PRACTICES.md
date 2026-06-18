@@ -118,14 +118,15 @@ records:
   - id: BP-2026-06-17-012
     scope: codex-buddy standalone invite helper boundary
     trigger: a transparent helper should help Linux/CLI users complete the official human flow without exposing the Server4 host or implying automated invite sending
-    guardrail: keep the helper in the dedicated `aaamosh/codex-invite-helper` repo, link Telegram relay copy only to that repo's raw/source URLs, keep the helper network-free, and keep real Server4 host/IP values out of public repo text and Git history
+    guardrail: keep the helper in the dedicated `aaamosh/codex-invite-helper` repo, link Telegram relay copy only to that repo's raw/source URLs, allow the old Codex HUD raw path only as a compatibility pointer, keep the helper network-free, and keep real Server4 host/IP values out of public repo text and Git history
     validation:
+      - assets/codex-buddy-invite-helper.html
       - ../codex-invite-helper/invite-helper.html
       - ../codex-invite-helper/test/invite-helper.test.mjs
       - packages/buddy/test/invite-helper-link.test.ts
       - apps/buddy-bot/test/integration-flow.test.ts
       - public repo hygiene scan before visibility switch
-    fitness_metric: future helper changes should preserve the standalone helper repo, no Server4-host exposure, no Codex HUD asset ownership, and no OpenAI mutation automation
+    fitness_metric: future helper changes should preserve the standalone helper repo, no Server4-host exposure, no Codex HUD helper ownership beyond a legacy pointer, and no OpenAI mutation automation
 
   - id: BP-2026-06-18-001
     scope: codex-buddy Server4 SQLite admin inspection

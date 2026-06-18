@@ -31,4 +31,16 @@ describe("standalone invite helper link", () => {
     expect(note).not.toContain("codex-hud/raw");
     expect(note).not.toContain(oldAssetName);
   });
+
+  it("keeps the old asset path as a pointer only", async () => {
+    const html = await import("node:fs/promises").then((fs) =>
+      fs.readFile(new URL("../../../assets/codex-buddy-invite-helper.html", import.meta.url), "utf8")
+    );
+    expect(html).toContain("Moved to codex-invite-helper");
+    expect(html).toContain(CODEX_INVITE_HELPER_DOWNLOAD_URL);
+    expect(html).toContain(CODEX_INVITE_HELPER_SOURCE_URL);
+    expect(html).not.toContain("Paste the recipient email");
+    expect(html).not.toContain("Copy checklist");
+    expect(html).not.toContain("No OpenAI invite endpoint calls");
+  });
 });
